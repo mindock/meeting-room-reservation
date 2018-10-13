@@ -80,8 +80,8 @@ public class ReservationServiceTest {
     public void getReservationsByDate_성공() {
         List<Reservation> reservations = new ArrayList<>();
         reservations.add(reservation1);
+        reservations.add(reservation2);
         List<Reservation> repeatReservations = new ArrayList<>();
-        repeatReservations.add(reservation2);
         repeatReservations.add(reservation3);
 
         when(reservationRepository.findByStartDate(date)).thenReturn(reservations);

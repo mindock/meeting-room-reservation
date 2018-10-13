@@ -9,9 +9,9 @@ import java.util.List;
 public interface ReservationRepository extends JpaRepository<Reservation, Long> {
     List<Reservation> findByStartDate(Date date);
 
-    List<Reservation> findByEndDateNotNullAndStartDateLessThanEqualAndEndDateGreaterThanEqual(Date startDate, Date endDate);
+    List<Reservation> findByEndDateNotNullAndStartDateLessThanAndEndDateGreaterThanEqual(Date startDate, Date endDate);
 
     default List<Reservation> findRepeatReservationByDate(Date date) {
-        return findByEndDateNotNullAndStartDateLessThanEqualAndEndDateGreaterThanEqual(date, date);
+        return findByEndDateNotNullAndStartDateLessThanAndEndDateGreaterThanEqual(date, date);
     }
 }
