@@ -1,0 +1,48 @@
+#main-container {
+    width: 960px;
+    margin: 0 480px;
+}
+
+#main-container h2 {
+    text-align: center;
+}
+
+.date-area {
+    text-align: center;
+}
+
+.timetable {
+    border: 1px solid black;
+    border-collapse: collapse;
+    margin: 10px auto;
+}
+
+.timetable tbody th {
+    background-color: lightgray;
+}
+
+.timetable tbody th,td {
+    width: 100px;
+    height: 50px;
+    border: 1px solid black;
+}
+
+.reservation-area {
+    position: absolute;
+}
+
+.reservation-area dl {
+    margin: 0;
+    background-color: lightblue;
+    position: absolute;
+    width: 100px;
+    z-index: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.reservation-area dl dt {
+    text-align: center;
+    font-weight: bold;
+}
