@@ -3,7 +3,9 @@ package com.kakaopay.meeting_room.service;
 import com.kakaopay.meeting_room.domain.Reservation;
 import com.kakaopay.meeting_room.dto.MeetingRoomDTO;
 import com.kakaopay.meeting_room.dto.ReservationDTO;
+import com.kakaopay.meeting_room.exception.MeetingRoomNotFoundException;
 import com.kakaopay.meeting_room.exception.OverlapReservationException;
+import com.kakaopay.meeting_room.repository.MeetingRoomRepository;
 import com.kakaopay.meeting_room.repository.ReservationRepository;
 import com.kakaopay.meeting_room.support.DateEntity;
 import lombok.extern.slf4j.Slf4j;
@@ -21,6 +23,9 @@ public class ReservationService {
     @Autowired
     private ReservationRepository reservationRepository;
 
+    @Autowired
+    private MeetingRoomRepository meetingRoomRepository;
+
     public List<ReservationDTO> getReservationsByDate(Date date) {
         List<Reservation> reservations = reservationRepository.findByStartDate(date);
         reservations.addAll(reservationRepository.findRepeatReservationByDate(date)
@@ -31,10 +36,16 @@ public class ReservationService {
     }
 
     public void addReservation(ReservationDTO reservationDTO) {
+        checkExistedMeetingRoom(reservationDTO.getMeetingRoom());
         reservationDTO.setStartDate(DateEntity.trimTime(reservationDTO.getStartDate()));
         if(checkOverlap(reservationDTO))
             throw new OverlapReservationException("예약 시간이 겹칩니다.");
         reservationRepository.save(Reservation.ofDTO(reservationDTO));
+    }
+
+    private void checkExistedMeetingRoom(MeetingRoomDTO meetingRoomDTO) {
+        if(!meetingRoomRepository.findById(meetingRoomDTO.getId()).isPresent())
+            throw new MeetingRoomNotFoundException("회의실이 존재하지 않습니다.");
     }
 
     private boolean checkOverlap(ReservationDTO reservationDTO) {

@@ -38,4 +38,10 @@ public class ReservationExceptionHandler {
         errorMessages.stream().forEach(error -> log.info("[MethodArgumentNotValidException] {}",error));
         return new ResponseEntity<>(errorMessages, HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(MeetingRoomNotFoundException.class)
+    public ResponseEntity<String> invalidMeetingRoom(MeetingRoomNotFoundException exception) {
+        log.info("[MeetingRoomNotFoundException] {}", exception.getMessage());
+        return new ResponseEntity<>(exception.getMessage(), HttpStatus.BAD_REQUEST);
+    }
 }
