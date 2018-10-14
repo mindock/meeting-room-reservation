@@ -1,15 +1,17 @@
 package com.kakaopay.meeting_room.domain;
 
 import com.kakaopay.meeting_room.dto.ReservationDTO;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
+@Slf4j
 @Entity
 @NoArgsConstructor
 public class Reservation {
@@ -89,5 +91,27 @@ public class Reservation {
 
     public ReservationDTO toDTO() {
         return new ReservationDTO(id, meetingRoom.toDTO(), bookerName, startDate, startTime, endTime, getRepeatNumber(startDate, endDate));
+    }
+
+    public boolean isOverlap(List<Reservation> reservations) {
+        log.debug("겹친 예약의 갯수 확인하기");
+        return reservations.stream()
+                .filter(reservation -> isOverlapTime(reservation)).count() != 0;
+    }
+
+    private boolean isOverlapTime(Reservation reservation) {
+        log.debug("시간 비교 [this] start: {}, end: {}  [other] start: {}, end: {}", changeTimeType(this.startTime), changeTimeType(this.endTime),
+                changeTimeType(reservation.startTime), changeTimeType(reservation.endTime));
+        if(changeTimeType(this.startTime) >= changeTimeType(reservation.endTime)
+                || changeTimeType(this.endTime) <= changeTimeType(reservation.startTime))
+            return false;
+        return true;
+    }
+
+    private double changeTimeType(String time) {
+        String[] split = time.split(":");
+        if(split[1].equals("00"))
+            return Integer.parseInt(split[0]);
+        return Integer.parseInt(split[0]) + 0.5;
     }
 }
