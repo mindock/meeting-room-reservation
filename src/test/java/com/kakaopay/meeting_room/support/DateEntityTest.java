@@ -31,9 +31,9 @@ public class DateEntityTest {
 
     @Test
     public void trimTime_성공() throws ParseException {
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd hh");
-        assertThat(DateEntity.trimHour(df.parse("2018-10-03 11"))).isEqualTo(date1);
-        assertThat(DateEntity.trimHour(df.parse("2018-10-17 13"))).isEqualTo(date2);
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        assertThat(DateEntity.trimTime(df.parse("2018-10-03 11:22:33"))).isEqualTo(date1);
+        assertThat(DateEntity.trimTime(df.parse("2018-10-17 13:43:55"))).isEqualTo(date2);
     }
 
     @Test

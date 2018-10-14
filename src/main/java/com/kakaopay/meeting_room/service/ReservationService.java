@@ -31,7 +31,7 @@ public class ReservationService {
     }
 
     public void addReservation(ReservationDTO reservationDTO) {
-        reservationDTO.setStartDate(DateEntity.trimHour(reservationDTO.getStartDate()));
+        reservationDTO.setStartDate(DateEntity.trimTime(reservationDTO.getStartDate()));
         if(checkOverlap(reservationDTO))
             throw new OverlapReservationException("예약 시간이 겹칩니다.");
         reservationRepository.save(Reservation.ofDTO(reservationDTO));

@@ -12,10 +12,13 @@ public class DateEntity {
         return calendar.getTime();
     }
 
-    public static Date trimHour(Date date) {
+    public static Date trimTime(Date date) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
         calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
         return calendar.getTime();
     }
 
@@ -34,5 +37,9 @@ public class DateEntity {
         if(split[1].equals("00"))
             return Integer.parseInt(split[0]);
         return Integer.parseInt(split[0]) + 0.5;
+    }
+
+    public static Date getToday() {
+        return new Date();
     }
 }
