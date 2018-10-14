@@ -31,13 +31,14 @@ public class ReservationService {
     }
 
     public void addReservation(ReservationDTO reservationDTO) {
+        reservationDTO.setStartDate(trimTime(reservationDTO.getStartDate()));
         if(checkOverlap(reservationDTO))
             throw new OverlapReservationException("예약 시간이 겹칩니다.");
         reservationRepository.save(Reservation.ofDTO(reservationDTO));
     }
 
     private boolean checkOverlap(ReservationDTO reservationDTO) {
-        Date date = reservationDTO.getStartDate();
+        Date date = trimTime(reservationDTO.getStartDate());
         int repeat = reservationDTO.getRepeatNum();
         Reservation reservation = Reservation.ofDTO(reservationDTO);
         do {
@@ -62,6 +63,13 @@ public class ReservationService {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(originDate);
         calendar.add(Calendar.DATE, 7);
+        return calendar.getTime();
+    }
+
+    private Date trimTime(Date date) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
         return calendar.getTime();
     }
 }

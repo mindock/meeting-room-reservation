@@ -48,4 +48,8 @@ public class ReservationDTO {
             return Integer.parseInt(split[0]);
         return Integer.parseInt(split[0]) + 0.5;
     }
+
+    public void setStartDate(Date date) {
+        this.startDate = date;
+    }
 }
