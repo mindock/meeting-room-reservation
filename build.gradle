@@ -31,6 +31,6 @@ dependencies {
     compile('pl.allegro.tech.boot:handlebars-spring-boot-starter:0.3.0')
     runtimeOnly('com.h2database:h2')
     runtime('net.rakugakibox.spring.boot:logback-access-spring-boot-starter:+')
-    compileOnly('org.projectlombok:lombok')
+    compileOnly('org.projectlombok:lombok:1.16.20')
     testImplementation('org.springframework.boot:spring-boot-starter-test')
 }
