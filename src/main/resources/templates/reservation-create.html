@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>회의실 예약</title>
+    <link rel="stylesheet" href="/css/common.css"/>
+    <link rel="stylesheet" href="/css/reservation.css"/>
+</head>
+<body>
+<div id="main-container">
+    <h2> 회의실 예약 신청 </h2>
+    <div class="create-reservation-area">
+        <form method="post" name="create=reservation-form">
+            <table id="create-reservation">
+                <tr>
+                    <th> 회의실 </th>
+                    <td>
+                        <select id="meetingRoom-select">
+                            {{#meetingRooms}}
+                            <option value="{{id}}"> {{name}} </option>
+                            {{/meetingRooms}}
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th> 예약자 </th>
+                    <td>
+                        <input name="bookerName" id="bookerName" maxlength="10" placeholder="2~10자로 입력해주세요." autocomplete=off required/>
+                        <div class="error" id="error-booker" style="display: none">
+                            <span> 2~10자로 입력해주세요. </span>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th> 예약일자 </th>
+                    <td>
+                        <input type="date" name="startDate" id="startDate" value="{{reservationDate}}"/>
+                    </td>
+                </tr>
+                <tr>
+                    <th> 예약시간 </th>
+                    <td>
+                        <input class="time" name="startTime" id="startTime" placeholder="hh:dd (30분 단위)" autocomplete=off required/>
+                        ~
+                        <input class="time" name="endTime" id="endTime" placeholder="hh:dd (30분 단위)" autocomplete=off required/>
+                        <div class="error" id="error-time-format" style="display: none;">
+                            <span> hh:dd형식으로 입력해주세요. (9:00~21:00 사이 30분 단위) ex) 9:00, 18:30 </span>
+                        </div>
+                        <div class="error" id="error-time" style="display: none">
+                            <span> 예약 시작시간을 끝시간보다 작게 입력해주세요. </span>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th> 반복하기 </th>
+                    <td>
+                        <div id="repeat-no">
+                            <input type="checkbox" id="repeat-check">
+                        </div>
+                        <div id="repeat-yes" style="display: none">
+                            반복횟수 <input type="number" name="repeatNum" id ="repeatNum" value="0" min="0" max="10"/>
+                        </div>
+                        <div class="error" id="error-repeat" style="display: none">
+                            <span>"0 ~ 10회로 입력해주세요."</span>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <input type="button" id="reservation-btn" value="예약하기">
+        </form>
+    </div>
+</div>
+
+<script src="/js/common.js"></script>
+<script src="/js/reservation.js"></script>
+</body>
+</html>

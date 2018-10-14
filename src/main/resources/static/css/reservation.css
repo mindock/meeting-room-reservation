@@ -11,9 +11,49 @@
     text-align: center;
 }
 
+#create-reservation-btn {
+    margin: 10px auto;
+}
+
+.create-reservation-area {
+    text-align: center;
+}
+
+#create-reservation {
+    width: 400px;
+    margin: 30px auto;
+}
+
+#create-reservation tbody th {
+    width: 50px;
+    background-color: lightgray;
+}
+
+#create-reservation tbody td {
+    padding-left: 10px;
+    text-align: left;
+}
+
+.time {
+    width: 110px;
+}
+
+.error {
+    color: red;
+    font-size: 13px;
+    font-weight: bold;
+    margin: 7px 0;
+}
+
+#repeat-no {
+    display: inline-block;
+}
+
+#repeatNum {
+    width: 30px;
+}
+
 .timetable {
-    border: 1px solid black;
-    border-collapse: collapse;
     margin: 10px auto;
 }
 
@@ -24,7 +64,6 @@
 .timetable tbody th,td {
     width: 100px;
     height: 50px;
-    border: 1px solid black;
 }
 
 .reservation-area {
