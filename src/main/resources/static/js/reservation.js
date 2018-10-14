@@ -102,6 +102,7 @@ class Reservation {
     repeatCheckHandler(evt) {
         const target = evt.target;
         if(target.checked) {
+            $("#repeatNum").value = 1;
             $("#repeat-yes").style.display = "inline-block";
         } else {
             $("#repeatNum").value = 0;
