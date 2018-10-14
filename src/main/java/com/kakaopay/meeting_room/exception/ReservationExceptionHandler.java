@@ -20,7 +20,7 @@ public class ReservationExceptionHandler {
     private final static String PARSE_EXCEPTION_STR = "입력받은 날짜 형식이 올바르지 않습니다. (yyyy-MM-dd 형식으로 작성)";
 
     @ExceptionHandler(ParseException.class)
-    public ResponseEntity<String> invaildDateFormat(ParseException exception) {
+    public ResponseEntity<String> invalidDateFormat(ParseException exception) {
         log.info("[ParseException] {}", PARSE_EXCEPTION_STR);
         return new ResponseEntity<>(PARSE_EXCEPTION_STR, HttpStatus.BAD_REQUEST);
     }
