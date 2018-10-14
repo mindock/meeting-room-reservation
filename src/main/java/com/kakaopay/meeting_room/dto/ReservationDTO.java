@@ -1,5 +1,6 @@
 package com.kakaopay.meeting_room.dto;
 
+import com.kakaopay.meeting_room.support.DateEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -39,14 +40,7 @@ public class ReservationDTO {
 
     @AssertTrue(message = "예약 시작시간을 끝시간보다 작게 입력해주세요.")
     public boolean isRightReservationTime() {
-        return changeTimeType(startTime) < changeTimeType(endTime);
-    }
-
-    private double changeTimeType(String time) {
-        String[] split = time.split(":");
-        if(split[1].equals("00"))
-            return Integer.parseInt(split[0]);
-        return Integer.parseInt(split[0]) + 0.5;
+        return DateEntity.changeTimeType(startTime) < DateEntity.changeTimeType(endTime);
     }
 
     public void setStartDate(Date date) {

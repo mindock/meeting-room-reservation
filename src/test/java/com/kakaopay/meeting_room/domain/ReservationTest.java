@@ -1,6 +1,5 @@
 package com.kakaopay.meeting_room.domain;
 
-import com.kakaopay.meeting_room.dto.ReservationDTO;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -8,7 +7,6 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -57,34 +55,6 @@ public class ReservationTest {
         assertThat(reservation.isReservationDate(dateFormat.parse("2018-10-15"))).isFalse();
         assertThat(reservation.isReservationDate(dateFormat.parse("2018-10-09"))).isFalse();
         assertThat(reservation.isReservationDate(dateFormat.parse("2018-10-24"))).isFalse();
-    }
-
-    @Test
-    public void getEndDate_성공() throws ParseException {
-        Date endDate = Reservation.getEndDate(date1, 2);
-        assertThat(endDate).hasYear(2018);
-        assertThat(endDate).hasMonth(10);
-        assertThat(endDate).hasDayOfMonth(17);
-
-        endDate = Reservation.getEndDate(date1, 5);
-        assertThat(endDate).hasYear(2018);
-        assertThat(endDate).hasMonth(11);
-        assertThat(endDate).hasDayOfMonth(7);
-
-        assertThat(Reservation.getEndDate(date1, 0)).isNull();
-    }
-
-    @Test
-    public void getDiffDate_성공() throws ParseException {
-        assertThat(Reservation.getDiffDate(date1, date2)).isEqualTo(14);
-        assertThat(Reservation.getDiffDate(dateFormat.parse("2018-09-03"), dateFormat.parse("2018-10-03"))).isEqualTo(30);
-    }
-
-    @Test
-    public void getRepeatNumber_성공() throws ParseException {
-        assertThat(Reservation.getRepeatNumber(date1, date2)).isEqualTo(2);
-        assertThat(Reservation.getRepeatNumber(dateFormat.parse("2018-09-03"), dateFormat.parse("2018-10-1"))).isEqualTo(4);
-        assertThat(Reservation.getRepeatNumber(date1, null)).isEqualTo(0);
     }
 
     @Test
