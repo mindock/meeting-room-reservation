@@ -63,5 +63,5 @@ cd build\libs
 ```
 **e. 프로젝트 실행**
 ```
-java -jar -Dfile.encoding=UTF-8 meeting_room-0.0.1.jar
+java -jar -Dspring.profiles.active=prod -Dfile.encoding=UTF-8 meeting_room-0.0.1.jar
 ```
