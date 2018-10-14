@@ -16,6 +16,9 @@ class Reservation {
         const startTime = $("#startTime").value.split(":");
         const hour = parseInt(startTime[0]);
         const minute = parseInt(startTime[1]);
+
+        if(isNaN(hour) || isNaN(minute))
+            return false;
         if(hour < 9 || hour > 20 || (minute != 0 && minute != 30))
             return false;
         return true;
@@ -24,6 +27,9 @@ class Reservation {
         const endTime = $("#endTime").value.split(":");
         const hour = parseInt(endTime[0]);
         const minute = parseInt(endTime[1]);
+
+        if(isNaN(hour) || isNaN(minute))
+            return false;
         if(hour < 9 || hour > 21 || (minute != 0 && minute != 30))
             return false;
         if(hour === 9 && minute === 0 || hour === 21 && minute === 30)
@@ -65,7 +71,7 @@ class Reservation {
         if(response.status == 201) {
             document.location.href = "/";
         } else {
-            response.json().then(result => {
+            response.text().then(result => {
                 alert(result);
             })
         }
