@@ -35,7 +35,7 @@ public class ReservationService {
         return reservations.stream().map(reservation -> reservation.toDTO()).collect(Collectors.toList());
     }
 
-    public void addReservation(ReservationDTO reservationDTO) {
+    public synchronized void addReservation(ReservationDTO reservationDTO) {
         checkExistedMeetingRoom(reservationDTO.getMeetingRoom());
         reservationDTO.setStartDate(DateEntity.trimTime(reservationDTO.getStartDate()));
         if(checkOverlap(reservationDTO))
