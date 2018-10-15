@@ -34,8 +34,12 @@
     text-align: left;
 }
 
+#meetingRoom-select, #bookerName {
+    width: 95%;
+}
+
 .time {
-    width: 110px;
+    width: 40%;
 }
 
 .error {
